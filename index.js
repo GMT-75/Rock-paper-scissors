@@ -4,13 +4,6 @@ function getComputerChoice () {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-// Gets computer's choice. Alternative approach.
-// function getComputerChoice () {
-//     const choices = ['rock', 'paper', 'scissors'];
-//     const randomIndex = Math.floor(Math.random() * choices.length);
-//     return choices[randomIndex];
-// }
-
 //Plays a round by taking in the computer and player's selection.
 function playRound (playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
@@ -40,6 +33,34 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-const playerSelection = 'paper';
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    let playerScore = 0;
+    let computerScore =0;
+
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt("Enter your choice for this round (Rock, Paper, Scissors)");
+        const computerSelection = getComputerChoice();
+
+        const roundResult = playRound(playerSelection, computerSelection);
+        console.log("Round " + (i +1) + ": " + roundResult);
+
+        if (roundResult.includes("win")) {
+            playerScore++;
+        } else if (roundResult.includes("lose")) {
+            computerScore++;
+        }
+    }
+    
+    console.log("Player score: " + playerScore);
+    console.log("Computer score: " + computerScore);
+
+    if (playerScore > computerScore) {
+        console.log("You win the game!");
+    } else if (computerScore > playerScore) {
+        console.log("You lose the game :(");
+    } else {
+        console.log("It's a draw!");
+    }
+}
+
+game();
